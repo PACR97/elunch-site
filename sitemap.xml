@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Página Principal -->
+    <url>
+        <loc>https://www.mielunch.com/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/hero-img.jpg</image:loc>
+            <image:title>eLunch - Catering Corporativo El Salvador</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Sección Inicio -->
+    <url>
+        <loc>https://www.mielunch.com/#inicio</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Sección Nosotros -->
+    <url>
+        <loc>https://www.mielunch.com/#nosotros</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/nuestra-experiencia-hero.jpg</image:loc>
+            <image:title>Nuestra Experiencia - eLunch</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Sección Servicios -->
+    <url>
+        <loc>https://www.mielunch.com/#servicios</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Servicio: Catering y Eventos -->
+    <url>
+        <loc>https://www.mielunch.com/#servicios-catering</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/service-catering-y-eventos.png</image:loc>
+            <image:title>Catering y Eventos</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Servicio: Eventos Masivos -->
+    <url>
+        <loc>https://www.mielunch.com/#servicios-eventos-masivos</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/service-alimentacion-eventos-masivos.png</image:loc>
+            <image:title>Alimentación de Eventos Masivos</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Servicio: Cafeterías Industriales -->
+    <url>
+        <loc>https://www.mielunch.com/#servicios-cafeterias</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/service-cafeteria-industriales-y-corporativas.png</image:loc>
+            <image:title>Cafeterías Industriales y Corporativas</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Servicio: Alimentación para Atletas -->
+    <url>
+        <loc>https://www.mielunch.com/#servicios-atletas</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/service-alimentacion-para-atletas-y-federaciones.png</image:loc>
+            <image:title>Alimentación para Atletas y Federaciones</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Sección Clientes Satisfechos -->
+    <url>
+        <loc>https://www.mielunch.com/#clientes</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Sección Testimoniales -->
+    <url>
+        <loc>https://www.mielunch.com/#testimoniales</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Sección Contacto -->
+    <url>
+        <loc>https://www.mielunch.com/#contacto</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://www.mielunch.com/public/img/form-background.jpg</image:loc>
+            <image:title>Contacto eLunch</image:title>
+        </image:image>
+    </url>
+    
+</urlset>

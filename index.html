@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#ea580c">
+    <meta name="msapplication-TileColor" content="#ea580c">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>eLunch - Soluciones Alimenticias Corporativas en El Salvador</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
-    <link rel="apple-touch-icon" href="public/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png">
+    <link rel="manifest" href="public/site.webmanifest">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="eLunch: 7 años de experiencia en catering corporativo, eventos masivos, cafeterías industriales y alimentación para atletas en El Salvador. Soluciones alimenticias profesionales.">
     <meta name="keywords" content="catering El Salvador, eventos corporativos, cafeterías industriales, alimentación atletas, catering empresas, eventos masivos">
     <meta name="author" content="eLunch">
+    
+    <!-- Geo Tags for Local SEO -->
+    <meta name="geo.region" content="SV">
+    <meta name="geo.placename" content="San Salvador">
+    <meta name="geo.position" content="13.6929403;-89.2181911">
+    <meta name="ICBM" content="13.6929403, -89.2181911">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.mielunch.com/">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -849,10 +867,20 @@
                     
                     <!-- Redes Sociales -->
                     <div class="flex gap-4 justify-center md:justify-start">
-                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-orange-600 transition">
+                        <!-- TODO: Reemplazar '#' con la URL real de Facebook -->
+                        <a href="https://www.facebook.com/elunchsv" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Síguenos en Facebook"
+                           class="bg-gray-800 p-2 rounded-lg hover:bg-orange-600 transition">
                             <i data-lucide="facebook" class="w-5 h-5"></i>
                         </a>
-                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-orange-600 transition">
+                        <!-- TODO: Reemplazar '#' con la URL real de Instagram -->
+                        <a href="https://www.instagram.com/elunchsv" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Síguenos en Instagram"
+                           class="bg-gray-800 p-2 rounded-lg hover:bg-orange-600 transition">
                             <i data-lucide="instagram" class="w-5 h-5"></i>
                         </a>
                     </div>
