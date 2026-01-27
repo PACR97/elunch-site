@@ -397,7 +397,6 @@ $html_body = <<<HTML
             <div class="meta">
                 <p><strong>📅 Fecha:</strong> $timestamp</p>
                 <p><strong>🌐 Origen:</strong> Formulario Web (mielunch.com)</p>
-                <p><strong>🆔 IP Cliente:</strong> {$_SERVER['REMOTE_ADDR']}</p>
             </div>
             
             <div class="section">

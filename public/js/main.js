@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
             btnText.classList.add('hidden');
             btnLoading.classList.remove('hidden');
             
-            // Prepare form data
-            const formData = new FormData();
+            // Prepare form data (using URLSearchParams for PHP dev server compatibility)
+            const formData = new URLSearchParams();
             formData.append('nombre', nombre);
             formData.append('telefono', telefono);
             formData.append('email', email);
@@ -101,6 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const response = await fetch('/api/send-email.php', {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
                     body: formData
                 });
                 
