@@ -1,49 +1,51 @@
 # ===================================
-# eLunch API Directory Security
+# eLunch API Directory Security - Hostinger Compatible
 # ===================================
-# This file protects the API directory and enforces security rules
+# Compatible with Hostinger shared hosting
 
 # Deny access to .env files
 <Files ".env">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
 # Deny access to .env.example
 <Files ".env.example">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
-# Only allow POST requests to send-email.php
+# Allow only POST requests to send-email.php
 <Files "send-email.php">
     <LimitExcept POST>
-        Order allow,deny
-        Deny from all
+        Require all denied
     </LimitExcept>
+</Files>
+
+# Allow access to send-email.php for normal POST requests
+<Files "send-email.php">
+    Require all granted
 </Files>
 
 # Deny access to .htaccess file itself
 <Files ".htaccess">
-    Order allow,deny
-    Deny from all
+    Require all denied
 </Files>
 
 # Prevent directory browsing
 Options -Indexes
 
-# Disable script execution in this directory (except PHP)
-<FilesMatch "\.(sh|bash|py|pl|cgi)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
+# Allow PHP execution in this directory
+<Files "*.php">
+    Require all granted
+</Files>
 
-# Add security headers
+# Security headers (Hostinger compatible)
 <IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "DENY"
-    Header set X-XSS-Protection "1; mode=block"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Access-Control-Allow-Origin "https://mielunch.com"
+    Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type"
 </IfModule>
 
 # Disable server signature

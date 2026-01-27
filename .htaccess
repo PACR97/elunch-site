@@ -103,23 +103,30 @@
 </IfModule>
 
 # ============================================
-# HEADERS DE SEGURIDAD
+# HEADERS DE SEGURIDAD Y CORS
 # ============================================
 <IfModule mod_headers.c>
   # Prevenir MIME type sniffing
-  Header set X-Content-Type-Options "nosniff"
+  Header always set X-Content-Type-Options "nosniff"
   
   # Protección XSS
-  Header set X-XSS-Protection "1; mode=block"
+  Header always set X-XSS-Protection "1; mode=block"
   
-  # Prevenir clickjacking
-  Header set X-Frame-Options "SAMEORIGIN"
+  # Prevenir clickjacking (SAMEORIGIN permite_same_domain)
+  Header always set X-Frame-Options "SAMEORIGIN"
   
   # Referrer Policy
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # CORS para API - Permitir llamadas desde el mismo dominio
+  <FilesMatch "^api/">
+    Header always set Access-Control-Allow-Origin "https://mielunch.com"
+    Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+  </FilesMatch>
   
   # Permissions Policy (antes Feature-Policy)
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
 # ============================================

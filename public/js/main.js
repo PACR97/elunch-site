@@ -99,10 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Send email notification via API
                 showFormMessage('Enviando tu solicitud...', 'info');
                 
-                const response = await fetch('/api/send-email.php', {
+                const response = await fetch('https://www.mielunch.com/api/send-email.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
                     body: formData
                 });
