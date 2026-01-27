@@ -483,12 +483,11 @@ TEXT;
 // SEND EMAIL VIA RESEND API
 // ===================================
 $resend_payload = [
-    'from' => "eLunch <$from_email>",
+    'from' => 'eLunch <noreply@mielunch.com>',
     'to' => [$to_email],
     'subject' => $subject,
     'html' => $html_body,
     'text' => $text_body,
-    'reply_to' => $email, // Allow direct reply to customer
     'tags' => [
         [
             'name' => 'category',
