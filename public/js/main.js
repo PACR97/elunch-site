@@ -54,14 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form values
-            const nombre = document.getElementById('nombre').value;
-            const telefono = document.getElementById('telefono').value;
-            const email = document.getElementById('email').value;
-            const mensaje = document.getElementById('mensaje').value;
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            const honeypot = document.getElementById('website').value; // Spam prevention
+            
+            // Get submit button
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
             
             // Basic validation
             if (!nombre || !telefono || !email || !mensaje) {
@@ -76,19 +82,93 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Compose WhatsApp message
-            const whatsappNumber = '50378778253'; // eLunch phone number
-            const whatsappMessage = `Hola, mi nombre es ${nombre}.%0A%0ATeléfono: ${telefono}%0AEmail: ${email}%0A%0AMensaje:%0A${encodeURIComponent(mensaje)}`;
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
             
-            // Show success message
-            showFormMessage('Redirigiendo a WhatsApp...', 'success');
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('nombre', nombre);
+            formData.append('telefono', telefono);
+            formData.append('email', email);
+            formData.append('mensaje', mensaje);
+            formData.append('website', honeypot); // Honeypot field
             
-            // Open WhatsApp in new tab
-            setTimeout(() => {
-                window.open(whatsappURL, '_blank');
-                contactForm.reset();
-            }, 1000);
+            try {
+                // Send email notification via API
+                showFormMessage('Enviando tu solicitud...', 'info');
+                
+                const response = await fetch('/api/send-email.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    // Email sent successfully
+                    showFormMessage('¡Solicitud enviada! Redirigiendo a WhatsApp...', 'success');
+                    
+                    // Compose WhatsApp message
+                    const whatsappNumber = '50372994388'; // eLunch phone number
+                    const whatsappMessage = `Hola, mi nombre es ${nombre}.%0A%0ATeléfono: ${telefono}%0AEmail: ${email}%0A%0AMensaje:%0A${encodeURIComponent(mensaje)}`;
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                    
+                    // Open WhatsApp after short delay
+                    setTimeout(() => {
+                        window.open(whatsappURL, '_blank');
+                        contactForm.reset();
+                        
+                        // Re-enable button
+                        submitBtn.disabled = false;
+                        btnText.classList.remove('hidden');
+                        btnLoading.classList.add('hidden');
+                    }, 1500);
+                    
+                } else {
+                    // Email failed, but still allow WhatsApp redirect (fallback)
+                    const errorMsg = result.error || 'Error al enviar el correo.';
+                    showFormMessage(errorMsg + ' Redirigiendo a WhatsApp...', 'warning');
+                    
+                    // Compose WhatsApp message
+                    const whatsappNumber = '50372994388';
+                    const whatsappMessage = `Hola, mi nombre es ${nombre}.%0A%0ATeléfono: ${telefono}%0AEmail: ${email}%0A%0AMensaje:%0A${encodeURIComponent(mensaje)}`;
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                    
+                    // Still redirect to WhatsApp (user experience priority)
+                    setTimeout(() => {
+                        window.open(whatsappURL, '_blank');
+                        contactForm.reset();
+                        
+                        // Re-enable button
+                        submitBtn.disabled = false;
+                        btnText.classList.remove('hidden');
+                        btnLoading.classList.add('hidden');
+                    }, 2000);
+                }
+                
+            } catch (error) {
+                // Network error or API unavailable - fallback to WhatsApp only
+                console.error('Error sending email:', error);
+                showFormMessage('Problema de conexión. Redirigiendo a WhatsApp...', 'warning');
+                
+                // Compose WhatsApp message
+                const whatsappNumber = '50372994388';
+                const whatsappMessage = `Hola, mi nombre es ${nombre}.%0A%0ATeléfono: ${telefono}%0AEmail: ${email}%0A%0AMensaje:%0A${encodeURIComponent(mensaje)}`;
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                
+                // Still redirect to WhatsApp (graceful degradation)
+                setTimeout(() => {
+                    window.open(whatsappURL, '_blank');
+                    contactForm.reset();
+                    
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    btnText.classList.remove('hidden');
+                    btnLoading.classList.add('hidden');
+                }, 2000);
+            }
         });
     }
     
@@ -100,17 +180,48 @@ document.addEventListener('DOMContentLoaded', function() {
             existingMessage.remove();
         }
         
+        // Determine styling based on message type
+        let bgColor, textColor, borderColor, icon;
+        
+        switch(type) {
+            case 'success':
+                bgColor = 'bg-green-100';
+                textColor = 'text-green-700';
+                borderColor = 'border-green-300';
+                icon = 'check-circle';
+                break;
+            case 'error':
+                bgColor = 'bg-red-100';
+                textColor = 'text-red-700';
+                borderColor = 'border-red-300';
+                icon = 'alert-circle';
+                break;
+            case 'warning':
+                bgColor = 'bg-yellow-100';
+                textColor = 'text-yellow-700';
+                borderColor = 'border-yellow-300';
+                icon = 'alert-triangle';
+                break;
+            case 'info':
+                bgColor = 'bg-blue-100';
+                textColor = 'text-blue-700';
+                borderColor = 'border-blue-300';
+                icon = 'info';
+                break;
+            default:
+                bgColor = 'bg-gray-100';
+                textColor = 'text-gray-700';
+                borderColor = 'border-gray-300';
+                icon = 'info';
+        }
+        
         // Create message element
         const messageDiv = document.createElement('div');
         messageDiv.id = 'form-message';
-        messageDiv.className = `p-4 rounded-lg mb-4 ${
-            type === 'success' 
-                ? 'bg-green-100 text-green-700 border border-green-300' 
-                : 'bg-red-100 text-red-700 border border-red-300'
-        }`;
+        messageDiv.className = `p-4 rounded-lg mb-4 ${bgColor} ${textColor} border ${borderColor}`;
         messageDiv.innerHTML = `
             <div class="flex items-center gap-2">
-                <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i>
+                <i data-lucide="${icon}" class="w-5 h-5"></i>
                 <span>${message}</span>
             </div>
         `;

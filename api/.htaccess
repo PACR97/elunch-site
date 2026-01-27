@@ -1,0 +1,50 @@
+# ===================================
+# eLunch API Directory Security
+# ===================================
+# This file protects the API directory and enforces security rules
+
+# Deny access to .env files
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to .env.example
+<Files ".env.example">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Only allow POST requests to send-email.php
+<Files "send-email.php">
+    <LimitExcept POST>
+        Order allow,deny
+        Deny from all
+    </LimitExcept>
+</Files>
+
+# Deny access to .htaccess file itself
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Prevent directory browsing
+Options -Indexes
+
+# Disable script execution in this directory (except PHP)
+<FilesMatch "\.(sh|bash|py|pl|cgi)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Add security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Disable server signature
+ServerSignature Off

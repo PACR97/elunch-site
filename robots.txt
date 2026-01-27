@@ -1,6 +1,7 @@
 # robots.txt para eLunch
 # Soluciones Alimenticias Corporativas en El Salvador
 # https://www.mielunch.com
+# Última actualización: 26 de Enero 2026
 
 # Permitir acceso a todos los bots de búsqueda
 User-agent: *
@@ -13,17 +14,24 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+# Permitir imágenes WebP
+Allow: /*.webp$
+
 # Bloquear acceso a archivos y directorios no públicos
 Disallow: /cgi-bin/
 Disallow: /*.php$
+Disallow: /.htaccess
+Disallow: /.git/
 
 # Sitemap XML
 Sitemap: https://www.mielunch.com/sitemap.xml
 
-# Tiempo de espera entre peticiones (crawl-delay)
-# No especificado para permitir rastreo rápido
+# Crawl delay - tiempo de espera entre peticiones
+# Configurado en 5 segundos para servidores compartidos
+Crawl-delay: 5
 
 # Notas:
 # - Este robots.txt permite la indexación completa del sitio
-# - Optimizado para SEO máximo
+# - Optimizado para SEO máximo y compatibilidad con imágenes WebP
 # - Compatible con todos los motores de búsqueda principales
+# - Protege archivos sensibles del sistema
